@@ -38,6 +38,21 @@
             "backgroundColor": "#000000"
           }
         }
+      ],
+      "expo-localization",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Sproutium souhaite accéder à la caméra pour identifier des plantes.",
+          "microphonePermission": false,
+          "recordAudioAndroid": false
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Sproutium souhaite accéder à votre galerie pour analyser une plante."
+        }
       ]
     ],
     "experiments": {

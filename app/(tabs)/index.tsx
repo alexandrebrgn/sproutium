@@ -1,98 +1,140 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { useState } from 'react';
+import { Alert, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { router } from 'expo-router';
+import * as ImagePicker from 'expo-image-picker';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
+import { OrganPicker } from '@/components/OrganPicker';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+import { IconSymbol } from '@/components/ui/icon-symbol';
+import { useThemeColor } from '@/hooks/use-theme-color';
+import { t } from '@/lib/i18n';
+import type { Organ } from '@/lib/plantnet';
 
-export default function HomeScreen() {
+export default function IdentifyScreen() {
+  const [organ, setOrgan] = useState<Organ>('auto');
+  const accent = useThemeColor({}, 'accent');
+  const surface = useThemeColor({}, 'surface');
+  const border = useThemeColor({}, 'border');
+  const muted = useThemeColor({}, 'textMuted');
+  const onAccent = useThemeColor({ light: '#FFFFFF', dark: '#0E1411' }, 'background');
+
+  const apiKey = process.env.EXPO_PUBLIC_PLANTNET_API_KEY;
+  const hasKey = !!apiKey && apiKey.length > 0;
+
+  async function pickFromGallery() {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: 'images',
+      quality: 0.8,
+      exif: false,
+    });
+    if (result.canceled) return;
+    const uri = result.assets[0]?.uri;
+    if (uri) {
+      router.push({ pathname: '/result', params: { photoUri: uri, organ } });
+    }
+  }
+
+  function takePhoto() {
+    router.push({ pathname: '/camera', params: { organ } });
+  }
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+    <ThemedView style={styles.flex}>
+      <SafeAreaView style={styles.flex} edges={['top']}>
+        <ScrollView contentContainerStyle={styles.scroll}>
+          <ThemedText type="title" style={styles.title}>
+            {t('home.title')}
+          </ThemedText>
+          <ThemedText style={[styles.subtitle, { color: muted }]}>
+            {t('home.subtitle')}
+          </ThemedText>
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+          {!hasKey ? (
+            <View style={[styles.warning, { borderColor: border, backgroundColor: surface }]}>
+              <ThemedText style={{ color: muted }}>{t('home.missingApiKey')}</ThemedText>
+            </View>
+          ) : null}
+
+          <ThemedText type="defaultSemiBold" style={styles.sectionLabel}>
+            {t('home.selectOrgan')}
+          </ThemedText>
+          <OrganPicker value={organ} onChange={setOrgan} />
+
+          <View style={styles.actions}>
+            <Pressable
+              onPress={() => (hasKey ? takePhoto() : Alert.alert(t('home.missingApiKey')))}
+              style={({ pressed }) => [
+                styles.primary,
+                { backgroundColor: accent, opacity: pressed ? 0.85 : 1 },
+              ]}>
+              <IconSymbol name="camera.fill" size={22} color={onAccent} />
+              <ThemedText
+                type="defaultSemiBold"
+                style={{ color: onAccent, fontSize: 17 }}>
+                {t('home.takePhoto')}
+              </ThemedText>
+            </Pressable>
+
+            <Pressable
+              onPress={() =>
+                hasKey ? pickFromGallery() : Alert.alert(t('home.missingApiKey'))
+              }
+              style={({ pressed }) => [
+                styles.secondary,
+                {
+                  backgroundColor: surface,
+                  borderColor: border,
+                  opacity: pressed ? 0.85 : 1,
+                },
+              ]}>
+              <IconSymbol name="photo.fill" size={22} color={accent} />
+              <ThemedText
+                type="defaultSemiBold"
+                style={{ color: accent, fontSize: 17 }}>
+                {t('home.pickGallery')}
+              </ThemedText>
+            </Pressable>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </ThemedView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  flex: { flex: 1 },
+  scroll: {
+    paddingHorizontal: 20,
+    paddingTop: 24,
+    paddingBottom: 48,
+    gap: 16,
+  },
+  title: { marginTop: 8 },
+  subtitle: { fontSize: 16, lineHeight: 22 },
+  warning: {
+    padding: 12,
+    borderRadius: 12,
+    borderWidth: StyleSheet.hairlineWidth,
+  },
+  sectionLabel: { marginTop: 8, fontSize: 15 },
+  actions: { marginTop: 16, gap: 12 },
+  primary: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    justifyContent: 'center',
+    gap: 10,
+    paddingVertical: 16,
+    borderRadius: 14,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  secondary: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 10,
+    paddingVertical: 16,
+    borderRadius: 14,
+    borderWidth: StyleSheet.hairlineWidth,
   },
 });

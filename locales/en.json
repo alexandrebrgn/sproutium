@@ -1,0 +1,66 @@
+{
+  "app": {
+    "name": "Sproutium",
+    "tagline": "Identify your plants in seconds"
+  },
+  "tabs": {
+    "home": "Identify",
+    "history": "History"
+  },
+  "home": {
+    "title": "Which plant?",
+    "subtitle": "Take a photo or pick one from your gallery to identify the species.",
+    "takePhoto": "Take a photo",
+    "pickGallery": "Pick from gallery",
+    "selectOrgan": "Which part of the plant?",
+    "missingApiKey": "Missing Pl@ntNet key. Set EXPO_PUBLIC_PLANTNET_API_KEY in .env."
+  },
+  "organ": {
+    "auto": "Auto",
+    "leaf": "Leaf",
+    "flower": "Flower",
+    "fruit": "Fruit",
+    "bark": "Bark"
+  },
+  "camera": {
+    "permission": "Sproutium needs camera access to identify plants.",
+    "grant": "Allow",
+    "flip": "Flip",
+    "capture": "Capture",
+    "cancel": "Cancel"
+  },
+  "result": {
+    "identifying": "Identifying…",
+    "noMatch": "No plant recognized. Try another photo or a different organ.",
+    "errorInvalidKey": "Invalid API key.",
+    "errorQuota": "Daily quota exceeded. Try again tomorrow.",
+    "errorNetwork": "No connection. Check your network.",
+    "errorUnknown": "Unknown error.",
+    "retry": "Retry",
+    "save": "Save to history",
+    "saved": "Saved ✓",
+    "confidence": "Confidence",
+    "family": "Family",
+    "details": "See details"
+  },
+  "history": {
+    "title": "History",
+    "empty": "No analyses saved yet.",
+    "delete": "Delete",
+    "clearAll": "Clear all",
+    "confirmClear": "Clear all history?",
+    "confirmDelete": "Delete this analysis?"
+  },
+  "plant": {
+    "loading": "Loading…",
+    "notFound": "No information available.",
+    "openWiki": "Open on Wikipedia"
+  },
+  "common": {
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "back": "Back",
+    "yes": "Yes",
+    "no": "No"
+  }
+}

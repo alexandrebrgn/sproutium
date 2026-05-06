@@ -1,0 +1,66 @@
+{
+  "app": {
+    "name": "Sproutium",
+    "tagline": "Identifiez vos plantes en un instant"
+  },
+  "tabs": {
+    "home": "Identifier",
+    "history": "Historique"
+  },
+  "home": {
+    "title": "Quelle plante ?",
+    "subtitle": "Prenez une photo ou choisissez-en une dans votre galerie pour identifier l'espèce.",
+    "takePhoto": "Prendre une photo",
+    "pickGallery": "Choisir dans la galerie",
+    "selectOrgan": "Quelle partie de la plante ?",
+    "missingApiKey": "Clé Pl@ntNet manquante. Renseignez EXPO_PUBLIC_PLANTNET_API_KEY dans .env."
+  },
+  "organ": {
+    "auto": "Auto",
+    "leaf": "Feuille",
+    "flower": "Fleur",
+    "fruit": "Fruit",
+    "bark": "Écorce"
+  },
+  "camera": {
+    "permission": "Sproutium a besoin de la caméra pour identifier vos plantes.",
+    "grant": "Autoriser",
+    "flip": "Retourner",
+    "capture": "Capturer",
+    "cancel": "Annuler"
+  },
+  "result": {
+    "identifying": "Analyse en cours…",
+    "noMatch": "Aucune plante reconnue. Essayez une autre photo ou un autre organe.",
+    "errorInvalidKey": "Clé API invalide.",
+    "errorQuota": "Quota journalier dépassé. Réessayez demain.",
+    "errorNetwork": "Pas de connexion. Vérifiez votre réseau.",
+    "errorUnknown": "Erreur inconnue.",
+    "retry": "Réessayer",
+    "save": "Enregistrer dans l'historique",
+    "saved": "Enregistré ✓",
+    "confidence": "Confiance",
+    "family": "Famille",
+    "details": "Voir les détails"
+  },
+  "history": {
+    "title": "Historique",
+    "empty": "Aucune analyse enregistrée pour le moment.",
+    "delete": "Supprimer",
+    "clearAll": "Tout effacer",
+    "confirmClear": "Effacer tout l'historique ?",
+    "confirmDelete": "Supprimer cette analyse ?"
+  },
+  "plant": {
+    "loading": "Chargement…",
+    "notFound": "Aucune information disponible.",
+    "openWiki": "Ouvrir sur Wikipédia"
+  },
+  "common": {
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "back": "Retour",
+    "yes": "Oui",
+    "no": "Non"
+  }
+}
