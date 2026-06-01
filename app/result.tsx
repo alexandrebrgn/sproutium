@@ -101,7 +101,7 @@ export default function ResultScreen() {
                     params: {
                       id: r.species.scientificNameWithoutAuthor,
                       common: r.species.commonNames?.[0] ?? '',
-                      family: r.species.family,
+                      family: r.species.family.scientificNameWithoutAuthor,
                     },
                   })
                 }

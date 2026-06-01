@@ -40,7 +40,7 @@ export function PlantResultCard({ result, onPress }: Props) {
           {result.species.scientificNameWithoutAuthor}
         </ThemedText>
         <ThemedText style={[styles.muted, { color: muted }]} numberOfLines={1}>
-          {t('result.family')} · {result.species.family}
+          {t('result.family')} · {result.species.family.scientificNameWithoutAuthor}
         </ThemedText>
       </View>
       <View style={styles.scoreBox}>

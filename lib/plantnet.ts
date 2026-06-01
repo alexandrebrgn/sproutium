@@ -1,11 +1,18 @@
 export type Organ = 'leaf' | 'flower' | 'fruit' | 'bark' | 'auto';
 
+export type PlantNetTaxon = {
+  scientificName: string;
+  scientificNameWithoutAuthor: string;
+  scientificNameAuthorship: string;
+};
+
 export type PlantNetSpecies = {
   scientificName: string;
   scientificNameWithoutAuthor: string;
+  scientificNameAuthorship: string;
   commonNames: string[];
-  family: string;
-  genus: string;
+  family: PlantNetTaxon;
+  genus: PlantNetTaxon;
 };
 
 export type PlantNetImage = {
