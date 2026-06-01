@@ -24,7 +24,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    - Put your API key in .env.
 
    ```typescript
-      EXPO_PUBLIC_PLANTNET_API_KEY=your_plantnet_api_key_here
+   EXPO_PUBLIC_PLANTNET_API_KEY=your_plantnet_api_key_here
    ```
 
 ### 4. Start the app
