@@ -4,17 +4,36 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
 ## Get started
 
-1. Install dependencies
+### 1. Prerequisites
+
+   - Install 'Expo Go' on your mobile device
+   - Create a Pl@ntNet API key :
+      - Go on [Pl@ntNet API](https://my.plantnet.org/settings/profile)
+      - Get the API key
+      - Keep it for later
+
+### 2. Install dependencies
 
    ```bash
    npm install
    ```
 
-2. Start the app
+### 3. Put your Pl@ntNet API key in your app
+
+   - Copy and move .env.example to .env
+   - Put your API key in .env.
+
+   ```typescript
+      EXPO_PUBLIC_PLANTNET_API_KEY=your_plantnet_api_key_here
+   ```
+
+### 4. Start the app
 
    ```bash
    npx expo start
    ```
+
+   Be sur your mobile device is on the same network as your local server
 
 In the output, you'll find options to open the app in a
 
@@ -34,6 +53,14 @@ npm run reset-project
 ```
 
 This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+
+## Developers
+
+This project has been developed by a group of 3 students of the formation Bachelor CDA 2025-2026 :
+
+- Lylian **Ball**
+- Océane **Guiochet**
+- Alexandre **Bourguignon**
 
 ## Learn more
 
