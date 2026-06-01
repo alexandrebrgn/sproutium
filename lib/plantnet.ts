@@ -59,7 +59,7 @@ export async function identify(
   } as unknown as Blob);
   form.append('organs', organ);
 
-  const url = `${ENDPOINT}?api-key=${encodeURIComponent(apiKey)}&lang=${lang}&include-related-images=true&nb-results=5`;
+  const url = `${ENDPOINT}?api-key=${encodeURIComponent(apiKey)}&lang=${lang}&include-related-images=true&nb-results=5&detailed=true`;
 
   let response: Response;
   try {
@@ -82,5 +82,6 @@ export async function identify(
   }
 
   const data = (await response.json()) as { results?: PlantNetResult[] };
+  console.log('Pl@ntNet API response:', data.results);
   return data.results ?? [];
 }

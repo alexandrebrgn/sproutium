@@ -42,6 +42,9 @@ export function PlantResultCard({ result, onPress }: Props) {
         <ThemedText style={[styles.muted, { color: muted }]} numberOfLines={1}>
           {t('result.family')} · {result.species.family.scientificNameWithoutAuthor}
         </ThemedText>
+        <ThemedText style={[styles.muted, { color: muted }]} numberOfLines={1}>
+          {t('result.genus')} · {result.species.genus.scientificNameWithoutAuthor}
+        </ThemedText>
       </View>
       <View style={styles.scoreBox}>
         <ThemedText type="defaultSemiBold" style={{ color: accent }}>
